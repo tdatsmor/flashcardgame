@@ -22,28 +22,3 @@ jobs:
         npm install
         npm ci   
         npm run build         
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v2
-
-    - name: Use Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '16'
-
-    - name: Install dependencies and build
-      run: |
-        cd flashcardgame
-        npm install
-        npm ci   
-        npm run build  
-
-    - name: Deploy
-      uses: JamesIves/github-pages-deploy-action@4.1.5
-      with:
-        branch: gh-pages
-        folder: flashcardgame/build
