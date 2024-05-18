@@ -16,17 +16,15 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: '14'
-    - name : Set up environment variables
-      run: echo "::debug::dist_dir=${{ github.workspace }}"
     - name: Install dependencies
       run: |
         cd flashcardgame
-        echo "::debug::dist_dir=${{ github.workspace }}"
-        npm install
         npm ci    
 
     - name: Build
-      run: npm run build
+      run: |
+        cd flashcardgame
+        npm run build
 
   deploy:
     needs: build
