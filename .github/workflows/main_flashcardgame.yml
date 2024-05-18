@@ -20,6 +20,7 @@ jobs:
       run: echo "::debug::dist_dir=${{ github.workspace }}"
     - name: Install dependencies
       run: |
+        cd ./flashcardgame
         npm ci    
 
     - name: Build
