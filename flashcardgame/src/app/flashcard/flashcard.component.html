@@ -1,0 +1,12 @@
+<!-- flashcard.component.html -->
+<div class="card-container">
+    <mat-card class="flashcard">
+    <mat-card-title class="card-title">{{ currentWord }}</mat-card-title>
+      <mat-card-content class="card-content">
+        <div class="input-button-container">
+        <input class="input-field" [(ngModel)]="userDefinition" type="text">
+        <button (click)="checkDefinition()">Check Definition</button>
+    </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
