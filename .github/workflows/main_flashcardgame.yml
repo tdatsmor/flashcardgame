@@ -19,7 +19,6 @@ jobs:
 
     - name: Install dependencies
       run: |
-        cd ./flashcardgame/flascardgame
         npm ci    
 
     - name: Build
