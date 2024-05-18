@@ -15,17 +15,13 @@ jobs:
     - name: Use Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '14'
-    - name: Install dependencies
+        node-version: '16'
+    - name: Install dependencies and build
       run: |
         cd flashcardgame
         npm install
-        npm ci    
-
-    - name: Build
-      run: |
-        cd flashcardgame
-        npm run build
+        npm ci   
+        npm run build         
 
   deploy:
     needs: build
