@@ -19,6 +19,7 @@ jobs:
     - name: Install dependencies
       run: |
         cd flashcardgame
+        npm install
         npm ci    
 
     - name: Build
