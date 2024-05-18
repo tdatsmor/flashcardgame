@@ -31,4 +31,13 @@
   .input-field {
     width: 100%;
   }
+  .card {
+    /* Other styles */
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
+    transition: box-shadow 0.3s ease-in-out;
+  }
+  
+  .card:hover {
+    box-shadow: 10px 10px 20px rgba(0,0,0,0.5);
+  }
   
