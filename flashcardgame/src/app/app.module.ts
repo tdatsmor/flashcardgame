@@ -15,6 +15,7 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   { path: 'flashcards', component: FlashcardComponent },
   { path: 'word-update', component: WordUpdateComponent },
+  { path: '', component: FlashcardComponent },
 ];
 
 @NgModule({
