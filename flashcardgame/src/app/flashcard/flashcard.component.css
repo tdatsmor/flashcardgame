@@ -30,6 +30,8 @@
   }
   .input-field {
     width: 100%;
+    margin-bottom: 20px;
+    font-size: 150%;
   }
   .card {
     /* Other styles */
@@ -40,4 +42,12 @@
   .card:hover {
     box-shadow: 10px 10px 20px rgba(0,0,0,0.5);
   }
-  
+  app-score {
+    margin-right: 20px;
+  }
+  .correct {
+    background-color: green;
+  }
+  .notcorrect {
+    background-color: red;
+  }

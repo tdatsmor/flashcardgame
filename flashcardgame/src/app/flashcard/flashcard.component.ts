@@ -1,6 +1,6 @@
 // flashcard.component.ts
 import { Component, OnInit } from '@angular/core';
-import { VocabService } from '../vocab.service';
+import { VocabService } from '../services/vocab.service';
 
 @Component({
   selector: 'app-flashcard',
@@ -11,11 +11,17 @@ export class FlashcardComponent implements OnInit {
   currentWord = '';
   currentDefinition = '';
   userDefinition = '';
+  right = 0;
+  wrong = 0;
+  total = 0;
+  isCorrect:boolean = false;
+  isWrong:boolean = false;
 
   constructor(private vocabService: VocabService) { }
 
   ngOnInit(): void {
     this.nextWord();
+    this.total = this.vocabService.vocab.length;
   }
 
   nextWord(): void {
@@ -26,11 +32,22 @@ export class FlashcardComponent implements OnInit {
 
   checkDefinition(): void {
     if (this.userDefinition.toLowerCase() === this.currentDefinition.toLowerCase()) {
-      alert('Correct!');
+      this.right++;
+      this.isCorrect = true;
+      this.isWrong = false;
     } else {
-      alert(`Sorry, the correct definition is: ${this.currentDefinition}`);
+      this.wrong++;
+      this.isCorrect = false;
+      this.isWrong = true;
+      console.log(this.isCorrect);
+      console.log(this.isWrong);
     }
-    this.userDefinition = '';
-    this.nextWord();
+
+    setTimeout(() => {
+      this.userDefinition = '';
+      this.isCorrect = false;
+      this.isWrong = false;
+      this.nextWord();
+    }, 2000);
   }
 }

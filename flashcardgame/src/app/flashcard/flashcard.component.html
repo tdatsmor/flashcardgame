@@ -1,6 +1,13 @@
 <!-- flashcard.component.html -->
+<div>
+  <app-score [correctAnswers]="right" [wrongAnswers]="wrong"></app-score>
+</div>
+
 <div class="card-container">
-    <mat-card class="flashcard card">
+  <div class="total-word-count">
+    Total words: {{ total }}
+  </div>
+    <mat-card class="flashcard card" [class.wrong]="isWrong">
     <mat-card-title class="card-title">{{ currentWord }}</mat-card-title>
       <mat-card-content class="card-content">
         <div class="input-button-container">

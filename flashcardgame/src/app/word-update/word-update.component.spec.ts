@@ -1,7 +1,7 @@
 // word-update.component.spec.ts
 import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { WordUpdateComponent } from './word-update.component';
-import { WordService } from '../word.service';
+import { WordService } from '../services/word.service';
 import { of } from 'rxjs';
 
 describe('WordUpdateComponent', () => {

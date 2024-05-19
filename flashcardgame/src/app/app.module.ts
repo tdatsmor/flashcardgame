@@ -9,21 +9,31 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
 import { ScoreComponent } from './score/score.component';
 import { WordUpdateComponent } from './word-update/word-update.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { RouterModule, Routes } from '@angular/router';
+
+const routes: Routes = [
+  { path: 'flashcards', component: FlashcardComponent },
+  { path: 'word-update', component: WordUpdateComponent },
+];
 
 @NgModule({
   declarations: [
     AppComponent,
     FlashcardComponent,
     ScoreComponent,
-    WordUpdateComponent
+    WordUpdateComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     BrowserAnimationsModule,
-    MatCardModule
+    MatCardModule,
+    RouterModule.forRoot(routes)
   ],
+  exports: [RouterModule],
   providers: [],
   bootstrap: [AppComponent]
 })

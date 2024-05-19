@@ -1,6 +1,6 @@
 // word-update.component.ts
 import { Component } from '@angular/core';
-import { WordService } from '../word.service';
+import { VocabService } from '../services/vocab.service';
 
 @Component({
   selector: 'app-word-update',
@@ -11,11 +11,9 @@ export class WordUpdateComponent {
   word = '';
   definition = '';
 
-  constructor(private wordService: WordService) {}
+  constructor(private vocabService: VocabService) {}
 
   addWord() {
-    this.wordService.addWord(this.word, this.definition).subscribe();
-    this.word = '';
-    this.definition = '';
+    this.vocabService.addWord(this.word, this.definition);
   }
 }
