@@ -50,4 +50,14 @@ export class FlashcardComponent implements OnInit {
       this.nextWord();
     }, 2000);
   }
+  newGame(): void {
+    this.right = 0;
+    this.wrong = 0;
+    this.total = 0;
+    this.isCorrect = false;
+    this.isWrong = false;
+    this.userDefinition = '';
+    this.currentWord = '';
+    // Add code to load the first word
+  }
 }

@@ -1,10 +1,13 @@
 .card-container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: start;
     height: 100vh; /* Adjust this value as needed */
   }
-
+  .total-word-count {
+    font-size: 20px; /* Adjust as needed */
+  }
   .flashcard {
     width: 300px;
     height: 600px;
@@ -45,9 +48,18 @@
   app-score {
     margin-right: 20px;
   }
+  .wrong {
+    background-color: red;
+  }
   .correct {
     background-color: green;
   }
-  .notcorrect {
-    background-color: red;
+  .controls{
+    margin-right: 50px;
+  }
+  .game{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Adjust as needed */
   }
