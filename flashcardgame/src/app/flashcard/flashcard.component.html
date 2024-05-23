@@ -9,6 +9,13 @@
   <div class="total-word-count">
     Total words: {{ total }}
   </div>
+  <div style="display: flex; justify-content: space-between;">
+    <button [disabled]="!isSpeak" (click)="onSpeak()">Speak</button>
+    <button [disabled]="!isEnglish" (click)="onEnglish()">English</button>
+    <button [disabled]="!isSpanish" (click)="onSpanish()">Spanish</button>
+    <button [disabled]="!isListen" (click)="onListen()">Listen</button>
+    <button [disabled]="!isRandom" (click)="onRandom()">Random</button>
+  </div>
     <mat-card class="flashcard card" [class.correct]="isCorrect" [class.wrong]="isWrong">
     <mat-card-title class="card-title">{{ currentWord }}</mat-card-title>
       <mat-card-content class="card-content">

@@ -17,6 +17,11 @@ export class FlashcardComponent implements OnInit {
   isCorrect:boolean = false;
   isWrong:boolean = false;
 
+  isRandom:boolean = true;
+  isEnglish:boolean = true;
+  isSpeak:boolean = true;
+  isListen:boolean = true;
+  isSpanish:boolean = true;
   constructor(private vocabService: VocabService) { }
 
   ngOnInit(): void {
@@ -26,12 +31,30 @@ export class FlashcardComponent implements OnInit {
 
   nextWord(): void {
     const flashcard = this.vocabService.vocab[Math.floor(Math.random() * this.vocabService.vocab.length)];
-    this.currentWord = flashcard.word;
-    this.currentDefinition = flashcard.definition;
+    if(this.isRandom) {
+    } else if (this.isEnglish) {
+      this.currentWord = flashcard.word;
+      this.currentDefinition = flashcard.definition;
+    } else if (this.isSpeak) {
+      this.currentWord = flashcard.word;
+      this.currentDefinition = flashcard.definition;
+      this.speak(this.currentWord);
+    } else if (this.isListen) {
+      this.currentWord = flashcard.word;
+      this.currentDefinition = flashcard.word;
+      this.startListening();
+    } else if (this.isSpanish) {
+      this.currentWord = flashcard.definition;
+      this.currentDefinition = flashcard.word;
+    }
   }
 
   checkDefinition(): void {
-    if (this.userDefinition.toLowerCase() === this.currentDefinition.toLowerCase()) {
+    console.log('check: ', this.userDefinition);
+    console.log('this.isListen: ', this.isListen);
+    let definitions = this.currentDefinition.toLocaleLowerCase().split('\\');
+    console.log('check: ', this.currentDefinition.toLocaleLowerCase());
+    if(definitions.includes(this.userDefinition.toLowerCase())) {
       this.right++;
       this.isCorrect = true;
       this.isWrong = false;
@@ -58,6 +81,88 @@ export class FlashcardComponent implements OnInit {
     this.isWrong = false;
     this.userDefinition = '';
     this.currentWord = '';
+    this.isRandom = true;
+    this.isEnglish = true;
+    this.isSpeak = true;
+    this.isListen = true;
+    this.isSpanish = true;
+    this.ngOnInit();
     // Add code to load the first word
+  }
+
+  onSpeak(): void {
+    this.isRandom = false;
+    this.isEnglish = false;
+    this.isSpeak = true;
+    this.isListen = false;
+    this.isSpanish = false;
+    this.nextWord();
+  }
+  onEnglish(): void {
+    this.isRandom = false;
+    this.isEnglish = true;
+    this.isSpeak = false;
+    this.isListen = false;
+    this.isSpanish = false;
+    this.nextWord();
+  }
+  onSpanish(): void {
+    this.isRandom = false;
+    this.isEnglish = false;
+    this.isSpeak = false;
+    this.isListen = false;
+    this.isSpanish = true;
+    this.nextWord();
+  }
+  onListen(): void {
+    this.isRandom = false;
+    this.isEnglish = false;
+    this.isSpeak = false;
+    this.isListen = true;
+    this.isSpanish = false;
+    this.nextWord();
+  }
+  onRandom(): void {
+    const properties = ['isEnglish', 'isSpeak', 'isListen', 'isSpanish'];
+    this.isRandom = true;
+    this.isEnglish = false;
+    this.isSpeak = false;
+    this.isListen = false;
+    this.isSpanish = false;
+  
+    const randomProperty = properties[Math.floor(Math.random() * properties.length)];
+    if (randomProperty === 'isEnglish') {
+      this.isEnglish = true;
+    } else if (randomProperty === 'isSpeak') {
+      this.isSpeak = true;
+    } else if (randomProperty === 'isListen') {
+      this.isListen = true;
+    } else if (randomProperty === 'isSpanish') {
+      this.isSpanish = true;
+    }
+    this.nextWord();
+  }
+  speak(text: string): void {
+    const utterance = new SpeechSynthesisUtterance(text);
+    window.speechSynthesis.speak(utterance);
+  }
+  startListening(): void {
+    const recognition = new (window as any).webkitSpeechRecognition();
+    recognition.lang = 'es';
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+  
+    recognition.start();
+  
+    recognition.onresult = (event: any) => {
+      const speechResult = event.results[0][0].transcript;
+      console.log('Result: ', speechResult);
+      this.userDefinition = speechResult;
+      this.checkDefinition();
+    };
+  
+    recognition.onerror = (event: any) => {
+      console.log('Error occurred in recognition: ' + event.error);
+    };
   }
 }
