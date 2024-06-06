@@ -45,4 +45,27 @@ describe('FlashcardComponent', () => {
     expect(component.right).toBe(1);
     expect(component.wrong).toBe(1);
   });
+  
+  describe('speak', () => {
+    it('should call speechSynthesis.speak with a new SpeechSynthesisUtterance', () => {
+      const text = 'test';
+      const utterance = new SpeechSynthesisUtterance(text);
+      spyOn(window.speechSynthesis, 'speak');
+
+      component.speak(text);
+
+      expect(window.speechSynthesis.speak).toHaveBeenCalledWith(utterance);
+    });
+  });
+
+  describe('startListening', () => {
+    it('should start speech recognition', () => {
+      const recognition = new (window as any).webkitSpeechRecognition();
+      spyOn(recognition, 'start');
+
+      component.startListening();
+
+      expect(recognition.start).toHaveBeenCalled();
+    });
+  });
 });
