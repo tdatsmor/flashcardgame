@@ -23,7 +23,7 @@ steps:
   
 - task: AzureWebApp@1
   inputs:
-    azureSubscription: 'AZ-204(0a777faa-b26f-43d4-b3be-ca7af30aeef7)'
+    azureSubscription: ''
     appType: 'webAppLinux'
     appName: 'flashcardgame'
     package: '$(System.DefaultWorkingDirectory)/**/*.zip'
